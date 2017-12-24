@@ -14,7 +14,7 @@ var gulp           = require('gulp'),
 		notify         = require("gulp-notify"),
 		rsync          = require('gulp-rsync');
 
-// Скрипты проекта
+// Пользовательские скрипты проекта
 
 gulp.task('common-js', function() {
 	return gulp.src([
@@ -28,15 +28,11 @@ gulp.task('common-js', function() {
 gulp.task('js', ['common-js'], function() {
 	return gulp.src([
 		'app/libs/jquery/dist/jquery.min.js',
-		'app/libs/equalheights/equalheights.js',
-		'app/libs/underscore/underscore-min.js',
+		'app/libs/owl/owl.carousel.min.js',
 		'app/libs/parallax-master/parallax.js',
 		'app/libs/fastclick/lib/fastclick.js',
-		'app/libs/howler.js/dist/howler.min.js',
-		'app/libs/mixitup/dist/mixitup.min.js',
-		'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
-		'app/js/common.min.js'
-	 // Всегда в конце
+		'app/libs/underscore/underscore-min.js',
+		'app/js/common.min.js' // Всегда в конце
 		])
 	.pipe(concat('scripts.min.js'))
 	// .pipe(uglify()) // Минимизировать весь js (на выбор)
@@ -73,7 +69,7 @@ gulp.task('watch', ['sass', 'js', 'browser-sync'], function() {
 
 gulp.task('imagemin', function() {
 	return gulp.src('app/img/**/*')
-	.pipe(cache(imagemin()))
+	.pipe(cache(imagemin())) // Cache Images
 	.pipe(gulp.dest('dist/img'));
 });
 
@@ -123,6 +119,8 @@ gulp.task('rsync', function() {
 		root: 'dist/',
 		hostname: 'username@yousite.com',
 		destination: 'yousite/public_html/',
+		// include: ['*.htaccess'], // Скрытые файлы, которые необходимо включить в деплой
+		recursive: true,
 		archive: true,
 		silent: false,
 		compress: true

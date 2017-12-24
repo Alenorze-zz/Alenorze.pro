@@ -12,6 +12,8 @@ $(document).ready(function() {
 			});
 
 
+
+
 		//TIME
 		// function rainbow() {
 		//   $('.navigation li').each(function() {
@@ -22,10 +24,10 @@ $(document).ready(function() {
 		//   });
 		// }
 
-	//scrollTo 0
-	(function() {
-		setTimeout(function(){window.scrollTo(0,0);},0);
-	})();
+	// //scrollTo 0
+	// (function() {
+	// 	setTimeout(function(){window.scrollTo(0,0);},0);
+	// })();
 
 	//FastClick
 	FastClick.attach(document.body);
@@ -34,11 +36,17 @@ $(document).ready(function() {
 	window.onresize = _.debounce(resize, 200);
 	window.onscroll = _.debounce(resize, 200);
 
-			var scene = $('#scene').get(0);
-  		var parallaxInstance = new Parallax(scene);
+	var scene = $('#scene').get(0);
+	var parallaxInstance = new Parallax(scene);
 
-
-
+	$(document).ready(function(){
+	  $(".owl-carousel").owlCarousel({
+			items: 1,
+			nav: false,
+			navText: ['<i class="fa fa-angle-double-left"></i>', '<i class="fa fa-angle-double-right"></i>'],
+			loop: true
+		});
+	});
 
 	// CANVAS
 		'use strict';
